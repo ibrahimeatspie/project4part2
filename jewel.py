@@ -19,3 +19,5 @@ class Jewel:
         return self.color
     def get_status(self):
         return self.status
+    def set_status(self, status):
+        self.status = status

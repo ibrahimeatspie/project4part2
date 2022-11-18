@@ -101,8 +101,7 @@ a = [
     [" "," "," "],
     ["C","A","B"]
 ]
-arr = create_predef_board(a)
-print_board(arr)
+
 
 #print_board(arr)
 """arr = create_size_arr(4,4)
