@@ -15,6 +15,7 @@ class Board:
     def insert_faller(self, faller):
         if self.faller == None:
             self.faller = faller
+            self.faller.move_down()
             top = self.faller.get_top()
             top_row, top_col = top.get_row(), top.get_col()
             mid = self.faller.get_mid()
@@ -25,11 +26,12 @@ class Board:
             self.arr[mid_row][mid_col] = mid
             self.arr[top_row][top_col] = top
     def iterate(self):
-        
+        #print_board(self.arr)
         if self.faller.get_bot().get_status() == "[":
             self.faller.move_down()
-        if self.faller.get_bot().get_status() == "|":
+        elif self.faller.get_bot().get_status() == "|":
             self.faller.freeze()
+            #pass
         if self.faller == None:
             self.check_horizontal_matches()
            
@@ -46,7 +48,7 @@ class Board:
                 if element != " ":
                     
                     #print(element.get_color())
-                    matching_chars = []
+                    #matching_chars = []
                     color = element.get_color()
                     #print(i,j)
                     #matching_chars.append(color)
@@ -58,14 +60,14 @@ class Board:
                             break
                         if self.arr[i][z].get_color() == color:
                             #print(element.get_color())
-                            print(i,z)
-                            matching_chars.append(self.arr[i][z].get_color())
+                            print(self.arr[i][z].get_color())
+                            #matching_chars.append(self.arr[i][z].get_color())
                         else:
                             break
                     #print(matching_chars)
-                    if len(matching_chars)>=3:
-                        matches.append(matching_chars)
-        print(matches)
+                    #if len(matching_chars)>=3:
+                        #matches.append(matching_chars)
+        #print(matches)
 
             
 a = [
@@ -83,6 +85,7 @@ top = Jewel("Y", 0, 1, "[")
 mid = Jewel("A", 1, 1, "[")
 bot = Jewel("S", 2, 1, "[")
 f = Faller(top, mid, bot, b)
+print_board(b.arr)
 b.insert_faller(f)
 print_board(b.arr)
 b.iterate()
@@ -95,5 +98,9 @@ b.iterate()
 print_board(b.arr)
 b.iterate()
 print_board(b.arr)
+
+
+
+
 
 
