@@ -9,18 +9,12 @@ def create_size_arr(rows, cols):
     for i in range(3):
         arr.append([])
         for j in range(cols):
-            arr[i].append([])
-            #arr[i][j].append([])
+            arr[i].append(' ')
             
     for i in range(3, rows+3):
         arr.append([])
         for j in range(cols):
-            arr[i].append([])
-            #arr[i][j].append([])
-            
-
-    
-    
+            arr[i].append(" ")
     return arr
 
 
@@ -63,47 +57,48 @@ def create_predef_board(arr):
             if arr[r][c] != " ":
                 stack.append(arr[r][c])
                 arr[r][c] = " "
-        #print(stack)
         stack = stack[::-1]
         for i in range(len(arr)-1, -1, -1):
             if len(stack)>0:
                 arr[i][c] = stack.pop()
 
-        #print(c)
-    
-
-        
-
-
     for i in range(0, len(arr)):
         for j in range(len(arr[i])):
             if arr[i][j] != " ":
                 arr[i][j] = Jewel(arr[i][j], i, j, " ")
-    
-    
-                        
-    """for row in arr:
-        print(row)"""
- 
+
     for row in arr:
         new_arr.append(row)       
-    """for row in new_arr:
-        print(row)"""
+    
     return new_arr
 
 
 
-a = [
 
-    [" ","B","G"],
-    [" "," "," "],
-    ["C","B","Y"],
-    [" "," "," "],
-    ["C","A","B"]
-]
+def get_rid_of_matches_in_board(board):
+    arr = board.arr
+    
+    for i in range(3, len(board.arr)):
+        for j in range(len(board.arr[i])):
+            if board.arr[i][j] == " ":
+                continue
+            else:
+                if board.arr[i][j].get_status() == "*":
+                    board.arr[i][j] = " "
+                    
 
+    for c in range(len(board.arr[0])):
+        stack = []
+        for r in range(len(board.arr)-1, -1, -1):
+            if board.arr[r][c] != " ":
+                stack.append(board.arr[r][c])
+                board.arr[r][c] = " "
+        stack = stack[::-1]
+        
+        for i in range(len(board.arr)-1, -1, -1):
+            if len(stack)>0:
+                board.arr[i][c] = stack.pop()
+ 
+    return board.arr
 
-#print_board(arr)
-"""arr = create_size_arr(4,4)
-print_board(arr)"""
-
+ 

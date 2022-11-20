@@ -71,12 +71,14 @@ class Faller:
         mid_row, mid_col = self.mid.get_row(), self.mid.get_col()
         top_row, top_col = self.top.get_row(), self.top.get_col()
         col = bot_col
-        if status == "[":
+        if status == "[" or status=="|":
             #print(bot_col-1)
             if bot_col-1 > -1:
                 #print("ASD")
                 #one col to left is within the board
                 if self.board.arr[bot_row][col-1] == " " and self.board.arr[mid_row][col-1] == " " and self.board.arr[top_row][col-1] == " ":
+                    if status=="|":
+                        self.set_status_of_jewels("[")
                     #the cell to left is empty
                     self.top.set_col(self.top.get_col()-1)
                     self.mid.set_col(self.mid.get_col()-1)
@@ -91,9 +93,10 @@ class Faller:
                     self.board.arr[mid_row][col-1] = self.mid
                     self.board.arr[top_row][col-1] = self.top
 
+                    new_col = col-1
                     
-                    new_bot_row = self.bot.get_row()
-                    if new_bot_row == len(self.board.arr)-1 or self.board.arr[new_bot_row+1][bot_col] != " ":
+                    
+                    if self.bot.get_row() == len(self.board.arr)-1 or self.board.arr[self.bot.get_row()+1][new_col] != " ":
                         self.set_status_of_jewels("|")
 
                 #update the arr 
@@ -103,12 +106,14 @@ class Faller:
         mid_row, mid_col = self.mid.get_row(), self.mid.get_col()
         top_row, top_col = self.top.get_row(), self.top.get_col()
         col = bot_col
-        if status == "[":
+        if status == "[" or status == "|":
             #print(bot_col-1)
             if bot_col+1 < len(self.board.arr[0]):
                 #print("ASD")
                 #one col to right is within the board
                 if self.board.arr[bot_row][col+1] == " " and self.board.arr[mid_row][col+1] == " " and self.board.arr[top_row][col+1] == " ":
+                    if status=="|":
+                        self.set_status_of_jewels("[")
                     #the cell to the right is empty
                     self.top.set_col(self.top.get_col()+1)
                     self.mid.set_col(self.mid.get_col()+1)
@@ -122,11 +127,13 @@ class Faller:
                     self.board.arr[bot_row][col+1] = self.bot
                     self.board.arr[mid_row][col+1] = self.mid
                     self.board.arr[top_row][col+1] = self.top
-
-                    
-                    new_bot_row = self.bot.get_row()
-                    if new_bot_row == len(self.board.arr)-1 or self.board.arr[new_bot_row+1][bot_col] != " ":
+                    new_col = col+1
+                    if self.bot.get_row() == len(self.board.arr)-1 or self.board.arr[self.bot.get_row()+1][new_col] != " ":
                         self.set_status_of_jewels("|")
+                    
+                    """new_bot_row = self.bot.get_row()
+                    if new_bot_row == len(self.board.arr)-1 or self.board.arr[new_bot_row+1][bot_col] != " ":
+                        self.set_status_of_jewels("|")"""
 
                 #update the arr 
 
