@@ -50,7 +50,7 @@ if __name__ == "__main__":
                 
                     
                     
-                if move[0] == "R":
+                elif move[0] == "R":
                     #we are rotating
                     if board.faller != None:
                         board.faller.rotate()
@@ -60,16 +60,17 @@ if __name__ == "__main__":
                         print("GAME OVER")
                         break
                     
-                if move[0] == "<":
+                elif move[0] == "<":
                     if board.faller != None:
                         board.faller.move_left()
                     print_board(board.arr)
                     if board.gameover == True:
+                        #check game over for moving faller here
                         game_over = True
                         print("GAME OVER")
                         break
 
-                if move[0] == ">":
+                elif move[0] == ">":
                     if board.faller != None:
                         board.faller.move_right()
                     print_board(board.arr)
@@ -77,9 +78,11 @@ if __name__ == "__main__":
                         game_over = True
                         print("GAME OVER")
                         break
-                if move[0] == "Q":
+                elif move[0] == "Q":
                     game_over = True
                     break
+                else:
+                    raise InvalidMoveError("Inputted move does not exist")
         
     elif empty_or_contents == "CONTENTS":
         arr = []
